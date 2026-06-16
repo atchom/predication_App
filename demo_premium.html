@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Preaching Reports — Démo premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A1628; --bg2:#0d1d35;
+    --blue:#3b82f6; --blue-d:#1E3A8A; --indigo:#6366f1; --violet:#8b5cf6;
+    --green:#10B981; --amber:#f59e0b;
+    --text:#ffffff; --muted:rgba(255,255,255,.62); --line:rgba(255,255,255,.12);
+    --card:rgba(255,255,255,.05); --card-bd:rgba(255,255,255,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--bg); color:var(--text); overflow-x:hidden;
+    background-image:
+      radial-gradient(ellipse 60% 50% at 80% -5%, rgba(59,130,246,.20), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 0% 30%, rgba(99,102,241,.15), transparent 60%);
+  }
+  h1,h2,h3,.font-head{font-family:'Plus Jakarta Sans',sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .grad-text{background:linear-gradient(180deg,#fff 0%,#93c5fd 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  a{color:inherit;text-decoration:none}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+    background:rgba(10,22,40,.72);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-family:'Plus Jakarta Sans'}
+  .logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--blue-d),var(--blue));
+    display:grid;place-items:center;box-shadow:0 6px 16px rgba(30,58,138,.5)}
+  .logo svg{width:18px;height:18px}
+  .nav-links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+  .nav-links a:hover{color:#fff}
+  .nav-tag{font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;
+    background:rgba(16,185,129,.14);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{position:relative;padding:70px 0 40px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;
+    background:var(--card);border:1px solid var(--card-bd);padding:7px 14px;border-radius:999px;backdrop-filter:blur(8px)}
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+  h1.title{font-size:clamp(40px,6vw,72px);font-weight:800;line-height:1.02;letter-spacing:-.03em;margin:18px 0 14px}
+  .lead{font-size:18px;color:var(--muted);line-height:1.6;max-width:520px}
+  .pills{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 26px}
+  .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;
+    background:rgba(20,42,80,.6);border:1px solid rgba(99,102,241,.3);padding:8px 13px;border-radius:10px}
+  .pill svg{width:15px;height:15px;color:var(--blue)}
+  .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:12px;font-weight:600;font-size:15px;cursor:pointer;border:1px solid transparent;transition:.2s}
+  .btn-primary{background:linear-gradient(135deg,var(--blue),var(--indigo));color:#fff;box-shadow:0 12px 30px rgba(59,130,246,.35)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(59,130,246,.5)}
+  .btn-ghost{background:var(--card);border-color:var(--card-bd);color:#fff}
+  .btn-ghost:hover{background:rgba(255,255,255,.1)}
+  .stats{display:flex;gap:30px;margin-top:34px}
+  .stat .n{font-family:'Plus Jakarta Sans';font-size:26px;font-weight:800}
+  .stat .l{font-size:12px;color:var(--muted);margin-top:2px}
+
+  /* PHONES */
+  .stage{position:relative;height:560px;display:flex;align-items:center;justify-content:center}
+  .glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+  .glow.b{width:320px;height:320px;background:var(--blue);top:0;right:10%}
+  .glow.i{width:300px;height:300px;background:var(--indigo);bottom:0;left:5%}
+  .device{position:relative;width:248px;aspect-ratio:559/1280;background:#070d18;border-radius:34px;
+    padding:9px;border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04) inset}
+  .device .scr{position:relative;width:100%;height:100%;border-radius:26px;overflow:hidden;background:#0b1220}
+  .device .scr img{width:100%;height:100%;object-fit:cover;display:block}
+  .device .notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:90px;height:18px;background:#070d18;border-radius:0 0 12px 12px;z-index:3}
+  .stage .device{position:absolute}
+  .ph-back{transform:translateX(34%) rotate(7deg) scale(.92);z-index:1;opacity:.96}
+  .ph-front{transform:translateX(-30%) rotate(-5deg);z-index:2}
+  .float{position:absolute;z-index:4;background:rgba(255,255,255,.10);backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:11px 14px;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+  .float .t{font-size:13px;font-weight:700}.float .s{font-size:11px;color:var(--muted)}
+  .float .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;margin-bottom:6px}
+  .f1{top:6%;left:0}.f2{top:42%;right:-2%}.f3{bottom:4%;left:8%}
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:10px}
+    .stage{height:520px;margin-top:10px}
+  }
+
+  /* SECTIONS */
+  section.block{padding:70px 0}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+  .h2{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-.02em;margin:10px 0 14px}
+  .sub{color:var(--muted);font-size:16px;max-width:620px;line-height:1.6}
+  .center{text-align:center;margin:0 auto}
+
+  /* ROLES */
+  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+  .role{background:var(--card);border:1px solid var(--card-bd);border-radius:18px;padding:24px;backdrop-filter:blur(8px);transition:.25s}
+  .role:hover{transform:translateY(-4px);border-color:rgba(59,130,246,.4)}
+  .role .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:14px}
+  .role h3{font-size:19px;margin-bottom:6px}
+  .role p{font-size:14px;color:var(--muted);line-height:1.55}
+  .role .meta{margin-top:14px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}
+  .role .meta svg{width:14px;height:14px;color:var(--blue)}
+  @media(max-width:760px){.roles{grid-template-columns:1fr}}
+
+  /* FEATURES */
+  .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+  .feat{background:var(--card);border:1px solid var(--card-bd);border-radius:18px;padding:26px;transition:.25s}
+  .feat:hover{transform:translateY(-4px);background:rgba(255,255,255,.08)}
+  .feat .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px;
+    background:linear-gradient(135deg,rgba(59,130,246,.25),rgba(99,102,241,.25));border:1px solid rgba(99,102,241,.35)}
+  .feat .ic svg{width:23px;height:23px;color:#bfd4ff}
+  .feat h3{font-size:18px;margin-bottom:8px}
+  .feat p{font-size:14px;color:var(--muted);line-height:1.55}
+  @media(max-width:860px){.feats{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.feats{grid-template-columns:1fr}}
+
+  /* SHOWCASE (interactive) */
+  .showcase{display:grid;grid-template-columns:1fr 360px;gap:50px;align-items:center;margin-top:46px}
+  .show-main{display:flex;justify-content:center;position:relative}
+  .show-main .glow{width:340px;height:340px;background:var(--indigo);opacity:.35;top:8%;left:50%;transform:translateX(-50%)}
+  #mainDevice{width:280px}
+  #mainScreen{transition:opacity .35s ease}
+  .show-info .eyebrow{color:var(--violet)}
+  #scrTitle{font-size:30px;font-weight:800;margin:8px 0 10px;font-family:'Plus Jakarta Sans'}
+  #scrDesc{color:var(--muted);font-size:16px;line-height:1.6;min-height:80px}
+  .thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .thumb{width:54px;aspect-ratio:559/1280;border-radius:9px;overflow:hidden;cursor:pointer;
+    border:2px solid transparent;opacity:.55;transition:.2s;background:#0b1220}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb:hover{opacity:.9}
+  .thumb.active{opacity:1;border-color:var(--blue);box-shadow:0 6px 16px rgba(59,130,246,.4)}
+  @media(max-width:860px){.showcase{grid-template-columns:1fr;gap:30px}.show-info{text-align:center}.thumbs{justify-content:center}#scrDesc{min-height:auto}}
+
+  /* GALLERY */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:42px}
+  .gcard{text-align:center}
+  .gcard .device{position:relative;width:100%;margin:0 auto}
+  .gcard .cap{margin-top:14px;font-size:14px;font-weight:600}
+  .gcard .cap span{display:block;font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
+  @media(max-width:900px){.gallery{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:640px){.gallery{grid-template-columns:repeat(2,1fr);gap:18px}}
+
+  /* STACK */
+  .stack-wrap{background:linear-gradient(135deg,rgba(30,58,138,.25),rgba(99,102,241,.12));
+    border:1px solid var(--card-bd);border-radius:24px;padding:44px;text-align:center;margin-top:30px}
+  .chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+  .chip{font-size:14px;font-weight:600;padding:10px 18px;border-radius:10px;
+    background:rgba(255,255,255,.06);border:1px solid var(--card-bd)}
+  .chip b{color:#bfd4ff}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:14px;margin-top:20px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav"><div class="wrap nav-in">
+  <div class="brand">
+    <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+    Preaching&nbsp;Reports
+  </div>
+  <nav class="nav-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#roles">Rôles</a>
+    <a href="#showcase">Écrans</a>
+    <a href="#stack">Stack</a>
+  </nav>
+  <span class="nav-tag">● Application Android</span>
+</div></div>
+
+<!-- HERO -->
+<header class="hero"><div class="wrap hero-grid">
+  <div class="hero-left">
+    <span class="badge"><span class="dot"></span> Application mobile · Temps réel</span>
+    <h1 class="title"><span class="grad-text">Rapports de prédication,</span><br>simples et connectés.</h1>
+    <p class="lead">Gestion mensuelle des rapports d'une congrégation : soumission par les proclamateurs, supervision par les responsables, le tout synchronisé en temps réel.</p>
+    <div class="pills">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Temps réel</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/></svg>Login téléphone</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>Rappels push</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Sécurité RLS</span>
+    </div>
+    <div class="cta">
+      <a href="#showcase" class="btn btn-primary">Explorer les écrans
+        <svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#features" class="btn btn-ghost">Fonctionnalités</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n grad-text">3</div><div class="l">rôles utilisateurs</div></div>
+      <div class="stat"><div class="n grad-text">12+</div><div class="l">écrans natifs</div></div>
+      <div class="stat"><div class="n grad-text">100%</div><div class="l">temps réel</div></div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="glow b"></div><div class="glow i"></div>
+    <div class="device ph-back"><div class="scr"><span class="notch"></span><img src="screens/dashboard.jpg" alt="Tableau de bord"></div></div>
+    <div class="device ph-front"><div class="scr"><span class="notch"></span><img src="screens/home.jpg" alt="Mes rapports"></div></div>
+    <div class="float f1"><div class="ic" style="background:rgba(59,130,246,.3)"><svg viewBox="0 0 24 24" width="16" fill="none" stroke="#fff" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5 5-2-2-4 4"/></svg></div><div class="t">118 rapports</div><div class="s">ce mois</div></div>
+    <div class="float f2"><div class="ic" style="background:rgba(16,185,129,.3)"><svg viewBox="0 0 24 24" width="16" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><div class="t">Soumis ✓</div><div class="s">statut temps réel</div></div>
+    <div class="float f3"><div class="ic" style="background:rgba(245,158,11,.3)"><svg viewBox="0 0 24 24" width="16" fill="none" stroke="#fff" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div><div class="t">Rappel envoyé</div><div class="s">push en masse</div></div>
+  </div>
+</div></header>
+
+<!-- FEATURES -->
+<section class="block" id="features"><div class="wrap">
+  <div class="center reveal">
+    <span class="eyebrow">Fonctionnalités</span>
+    <h2 class="h2">Tout le cycle d'un rapport, maîtrisé</h2>
+    <p class="sub center">De la saisie par le proclamateur jusqu'au suivi consolidé de l'administrateur, chaque étape est pensée pour être rapide et fiable.</p>
+  </div>
+  <div class="feats">
+    <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5 5-2-2-4 4"/></svg></div><h3>Tableau de bord mensuel</h3><p>Statuts « Soumis ✓ » / « En attente ⏳ » par groupe, totaux automatiques, mise à jour en temps réel.</p></div>
+    <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/></svg></div><h3>Connexion par téléphone</h3><p>Sans mot de passe pour les proclamateurs, détection du pays (🇨🇲 +237) et format E.164 composé automatiquement.</p></div>
+    <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div><h3>Rappels push en masse</h3><p>Un bouton « Rappeler les X en attente » déclenche des notifications Expo Push aux retardataires.</p></div>
+    <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div><h3>3 rôles & permissions</h3><p>Admin, responsable de groupe et proclamateur, avec des accès cloisonnés appliqués côté base.</p></div>
+    <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h3>Cartographie des territoires</h3><p>Visualisation géographique des territoires sur carte interactive pour organiser le terrain.</p></div>
+    <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>Sécurité by design</h3><p>Row-Level Security et SecureStore chiffré : chaque utilisateur ne voit que ses propres données.</p></div>
+  </div>
+</div></section>
+
+<!-- ROLES -->
+<section class="block" id="roles"><div class="wrap">
+  <div class="center reveal">
+    <span class="eyebrow">Rôles utilisateurs</span>
+    <h2 class="h2">Une expérience par profil</h2>
+    <p class="sub center">Trois niveaux d'accès, des données strictement cloisonnées via Row-Level Security.</p>
+  </div>
+  <div class="roles">
+    <div class="role reveal">
+      <span class="tag" style="background:rgba(59,130,246,.18);color:#93c5fd">Admin</span>
+      <h3>Administrateur</h3>
+      <p>Vue d'ensemble complète : tous les groupes, tous les rapports, gestion des responsables et des proclamateurs.</p>
+      <div class="meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Connexion email + mot de passe</div>
+    </div>
+    <div class="role reveal">
+      <span class="tag" style="background:rgba(139,92,246,.18);color:#c4b5fd">Responsable</span>
+      <h3>Responsable de groupe</h3>
+      <p>Limité à son groupe : suit ses proclamateurs, consulte leurs rapports et envoie des rappels ciblés.</p>
+      <div class="meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Connexion email + mot de passe</div>
+    </div>
+    <div class="role reveal">
+      <span class="tag" style="background:rgba(16,185,129,.18);color:#6ee7b7">Proclamateur</span>
+      <h3>Proclamateur</h3>
+      <p>Soumet et consulte uniquement ses propres rapports, un par mois, avec un historique en lecture seule.</p>
+      <div class="meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/></svg>Connexion par téléphone, sans mot de passe</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SHOWCASE interactive -->
+<section class="block" id="showcase"><div class="wrap">
+  <div class="center reveal">
+    <span class="eyebrow" style="color:var(--violet)">Visite guidée</span>
+    <h2 class="h2">Les écrans, en vrai</h2>
+    <p class="sub center">Cliquez sur une vignette pour parcourir l'application, écran par écran.</p>
+  </div>
+  <div class="showcase">
+    <div class="show-main">
+      <div class="glow"></div>
+      <div class="device" id="mainDevice"><div class="scr"><span class="notch"></span><img id="mainScreen" src="screens/login.jpg" alt="écran"></div></div>
+    </div>
+    <div class="show-info reveal">
+      <span class="eyebrow">Écran sélectionné</span>
+      <h3 id="scrTitle">Connexion proclamateur</h3>
+      <p id="scrDesc">Connexion sans mot de passe par numéro de téléphone, façon WhatsApp : détection automatique du pays et de l'indicatif.</p>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- GALLERY -->
+<section class="block"><div class="wrap">
+  <div class="center reveal">
+    <span class="eyebrow">Galerie</span>
+    <h2 class="h2">Tous les écrans</h2>
+    <p class="sub center">Captures réelles de l'application, côté proclamateur et côté administration.</p>
+  </div>
+  <div class="gallery" id="gallery"></div>
+</div></section>
+
+<!-- STACK -->
+<section class="block" id="stack"><div class="wrap reveal">
+  <div class="stack-wrap">
+    <span class="eyebrow">Stack technique</span>
+    <h2 class="h2" style="margin-top:6px">Moderne, cloud-native, sécurisé</h2>
+    <p class="sub center">Un socle temps réel, des apps natives Android et une sécurité appliquée jusqu'à la base de données.</p>
+    <div class="chips">
+      <span class="chip"><b>PostgreSQL</b></span>
+      <span class="chip">Auth</span>
+      <span class="chip">Edge Functions · Deno</span>
+      <span class="chip">Expo SDK 51</span>
+      <span class="chip">Row-Level Security</span>
+      <span class="chip">Expo Push</span>
+      <span class="chip">EAS Build</span>
+      <span class="chip">Material 3</span>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  Preaching Reports — Application de gestion des rapports mensuels de prédication · Maquette de démonstration
+</div></footer>
+
+<script>
+  // Screen data (real screenshots)
+  const screens = [
+    {f:"login.jpg", t:"Connexion proclamateur", d:"Connexion sans mot de passe par numéro de téléphone, façon WhatsApp : détection automatique du pays et de l'indicatif."},
+    {f:"home.jpg", t:"Mes rapports", d:"Le proclamateur soumet et consulte son rapport du mois sur un écran clair, avec confirmation immédiate."},
+    {f:"dashboard.jpg", t:"Tableau de bord admin", d:"Suivi mensuel : nombre de groupes, rapports soumis et en attente, mis à jour en temps réel."},
+    {f:"annuaire.jpg", t:"Annuaire des proclamateurs", d:"Liste filtrable (pionnier permanent / auxiliaire) avec recherche instantanée et avatars."},
+    {f:"rapports.jpg", t:"Rapports & statistiques", d:"Tous les rapports filtrables par mois et année, avec totaux calculés automatiquement."},
+    {f:"history.jpg", t:"Historique", d:"Historique en lecture seule des rapports passés, navigable par année."},
+    {f:"territoire.jpg", t:"Cartographie des territoires", d:"Visualisation géographique des territoires sur carte interactive."},
+    {f:"saisie1_daniel.jpg", t:"Formulaire dynamique", d:"Le formulaire s'adapte au statut : pionnier permanent, auxiliaire ou proclamateur."},
+    {f:"admin_saisie_form.jpg", t:"Aperçu du rapport", d:"Prévisualisation avant envoi : mois, statut, heures et confirmation en un geste."},
+    {f:"menu_admin.jpg", t:"Menu administration", d:"Accès rapide aux territoires, saisies et gestion, par congrégation."},
+    {f:"screen9.jpg", t:"Espace responsable", d:"Le responsable gère uniquement son groupe : territoires, doublons et langue."}
+  ];
+  const base = "screens/";
+
+  // Build thumbnails
+  const thumbs = document.getElementById('thumbs');
+  const mainImg = document.getElementById('mainScreen');
+  const scrTitle = document.getElementById('scrTitle');
+  const scrDesc = document.getElementById('scrDesc');
+
+  screens.forEach((s,i)=>{
+    const t=document.createElement('div');
+    t.className='thumb'+(i===0?' active':'');
+    t.innerHTML='<img src="'+base+s.f+'" alt="'+s.t+'">';
+    t.addEventListener('click',()=>select(i));
+    thumbs.appendChild(t);
+  });
+
+  function select(i){
+    const s=screens[i];
+    mainImg.style.opacity=0;
+    setTimeout(()=>{ mainImg.src=base+s.f; mainImg.style.opacity=1; },180);
+    scrTitle.textContent=s.t;
+    scrDesc.textContent=s.d;
+    document.querySelectorAll('.thumb').forEach((el,j)=>el.classList.toggle('active',j===i));
+  }
+
+  // Build gallery
+  const gallery=document.getElementById('gallery');
+  screens.forEach(s=>{
+    const c=document.createElement('div');
+    c.className='gcard reveal';
+    c.innerHTML='<div class="device"><div class="scr"><span class="notch"></span><img src="'+base+s.f+'" alt="'+s.t+'"></div></div>'
+      +'<div class="cap">'+s.t+'</div>';
+    gallery.appendChild(c);
+  });
+
+  // Reveal on scroll
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
